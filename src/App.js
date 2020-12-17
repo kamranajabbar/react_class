@@ -1,37 +1,19 @@
 import React, {useState} from 'react';
-import {Message} from './Message';
+import Parent from './Parent';
 import './App.css';
+import counterContext from './CounterContext';
 
 // Stateless Components
 function App() {
-  let [count, setCount] = useState(0);
-  let [isMorning, setMorning] = useState(true);
+  let countState = useState(1);  //[count, setCount]
 
   return (
-    /* <div className={`box dayLight`}>
-       <div className="box dayLight"> 
-       <div className={`box ${isMorning ? 'dayLight' : ''}`}> */
-    
-    <div className={`box ${isMorning ? 'dayLight' : ''}`}>
-      <h1>Good {isMorning ? 'Morning' : 'Night'}</h1>
-
-      <Message counter={count} />
-
-      <br />
-
-      <button onClick = { 
-          // () => setCount(count + 1) //Note: Same as below
-          () => setCount(++count) 
-        }>
-        Update Counter
-      </button>
-
-      <button onClick = { 
-          () => setMorning(!isMorning) 
-        }>
-        Update Day
-      </button>
-    </div>
+    // Context API used here
+    <counterContext.Provider value={countState}>
+      <div>
+        <Parent />
+      </div>
+    </counterContext.Provider>
   );
 }
 
